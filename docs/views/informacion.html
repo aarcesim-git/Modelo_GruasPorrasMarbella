@@ -15,12 +15,12 @@
         <!-- NAVBAR -->
     <header>
         <nav class="navbar">
-            <a href="../../index.html" class="logo-link">
+            <a href="../index.html" class="logo-link">
                 <img src="../img/logo_gpm.png" alt="Gruas Porras Marbella 2023" class="logo-img" width="666" height="374">
             </a>
   
         <ul class="nav-links">
-            <li><a href="../../index.html" >Inicio</a></li>
+            <li><a href="../index.html" >Inicio</a></li>
             <li><a href="../views/quienes_somos.html">Quiénes somos</a></li>
             <li><a href="../views/contacto.html" >Contacto</a></li>
             <li><a href="../views/informacion.html" class="activo">Infórmate</a></li>
@@ -48,7 +48,14 @@
 
                     <div class="form-group">
                         <label for="telefono">Teléfono</label>
-                        <input type="tel" id="telefono" name="telefono" placeholder="600 000 000" maxlength="9" required>
+                        <input type="tel" 
+                            id="telefono" 
+                            name="telefono" 
+                            placeholder="600000000" 
+                            maxlength="9" 
+                            pattern="[0-9]{9}" 
+                            title="Debe introducir un número de teléfono válido de 9 dígitos (ej: 600123456)" 
+                            required>
                     </div>
 
                     <div class="form-group">
@@ -71,7 +78,16 @@
 
                     <div class="form-group">
                         <label for="matricula">Matrícula</label>
-                        <input type="text" id="matricula" name="matricula" placeholder="1234 ABC" required>
+                        <input 
+                        type="text" 
+                        id="matricula" 
+                        name="matricula" 
+                        placeholder="0000BBB" 
+                        maxlength="7" 
+                        pattern="^[0-9]{4}[BCDFGHJKLMNPRSTVWXYZ]{3}$" 
+                        title="Introduzca una matrícula válida (4 números y 3 letras, sin vocales. Ej: 0000BBB)" 
+                        style="text-transform: uppercase;"
+                        required>
                     </div>
                 </div>
                  
