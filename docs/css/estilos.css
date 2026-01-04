@@ -375,7 +375,7 @@ padding: 20px 20px 60px 20px;
 }
 
 /* == INFORMACIÓN==*/
-/* Añadimos 'select' a la regla que ya tenías */
+
 .form-group input, 
 .form-group textarea,
 .form-group select {
@@ -386,6 +386,12 @@ padding: 20px 20px 60px 20px;
     font-size: 1rem;
     transition: all 0.3s ease;
     background-color: white; /* Asegura fondo blanco en el select */
+}
+
+.form-container p{
+    margin-bottom: 20px;
+    font-size: 1.0rem;
+    color: var(--azul);
 }
 
 /* Efecto focus para el select también */
@@ -400,47 +406,70 @@ padding: 20px 20px 60px 20px;
     text-align: center;
 }
 
+.vehiculos-section h2 {
+    color: var(--texto-principal);
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
 /* FLOTA DE VEHÍCULOS*/
-.grid-vehiculos { /* Configuración del Grid 1x5 */
+/* Contenedor principal */
+.grid-vehiculos {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); 
-    gap: 15px; 
-    max-width: 1300px; 
+    grid-template-columns: repeat(6, 1fr); /* 6 columnas para máxima flexibilidad */
+    gap: 40px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
-/* Tarjeta individual */
-.card-vehiculo {
-    background: var(--blanco);
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+/* --- LAS 3 DE ARRIBA (Verticales/Rectangulares hacia arriba) --- */
+.card-vehiculo:nth-child(1),
+.card-vehiculo:nth-child(2),
+.card-vehiculo:nth-child(3) {
+    grid-column: span 2;
 }
 
-.card-vehiculo:hover {
-    transform: translateY(-5px); /* Pequeño salto al pasar el ratón */
+.card-vehiculo:nth-child(1) img,
+.card-vehiculo:nth-child(2) img,
+.card-vehiculo:nth-child(3) img {
+    height: 400px; /* Mucho más alta para efecto vertical */
+    object-fit: cover;
 }
 
+/* --- LAS 2 DE ABAJO (Horizontales y centradas) --- */
+/* Asistencia Ligera */
+.card-vehiculo:nth-child(4) {
+    grid-column: 1 / span 3; /* Ocupa la mitad izquierda */
+}
+
+/* Coche Taller */
+.card-vehiculo:nth-child(5) {
+    grid-column: 4 / span 3; /* Ocupa la mitad derecha */
+}
+
+.card-vehiculo:nth-child(4) img,
+.card-vehiculo:nth-child(5) img {
+    height: 400px; /* Altura menor para que parezcan más anchas */
+    object-fit: cover;
+}
+
+/* --- MEJORA VISUAL PARA LAS IMÁGENES --- */
 .card-vehiculo img {
     width: 100%;
-    height: 150px;
-    object-fit: cover; /* Para que todas las fotos encajen igual */
-    border-radius: 5px;
-    margin-bottom: 15px;
+    border-radius: 8px;
+    display: block;
+    transition: transform 0.5s ease;
 }
 
-.card-vehiculo h3 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
+.card-vehiculo:hover img {
+    transform: scale(1.03); /* Efecto zoom suave al pasar el ratón */
+}
+
+.grid-vehiculos h3{
+    margin-top: 15px;
     color: var(--rojo);
+    font-size: 1.6rem;
 }
-
-.card-vehiculo p {
-    font-size: 0.9rem;
-    color: var(--texto-principal);
-}
-
 
 /* FORMULARIO DE CONTACTO */
 /* Contenedor General */
@@ -554,52 +583,183 @@ color: var(--blanco);
 font-size: 0.9rem;
 }  
 
-/* ==MEDIA QUERYS MÓVIL Y TABLET */
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column; /* Apila logo y menú */
-    text-align: center;
-  }
+/* ============================================================
+   RESPONSIVE DESIGN (De más grande a más pequeño)
+   ============================================================ */
 
-  .logo-text {
-    font-size: 1.2rem;
-    margin: 10px 0;
-  }
-
-  .nav-links {
-    flex-direction: column; /* Enlaces uno debajo de otro */
-    width: 100%;
-    padding: 0;
-  }
-
-  .nav-links li {
-    margin: 10px 0;
-  }
-
-  .nav-links a {
-    font-size: 1.3rem;
-  }
-
-  .container {
-    padding: 1rem;
-  }
-
-  #map {
-    height: 300px; /* Mapa un poco más pequeño en móvil */
-  }
-}
-
-@media (max-width: 992px) {
+/* --- TABLETS Y PANTALLAS MEDIANAS (Hasta 1024px) --- */
+@media (max-width: 1024px) {
     .servicios {
-        grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablets */
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas en servicios */
+    }
+
+    .historia-contenedor {
+        grid-template-columns: 1fr; /* Quiénes somos: imagen y texto uno bajo otro */
+        gap: 30px;
+    }
+
+    .form-horizontal {
+        grid-template-columns: repeat(2, 1fr); /* El presupuesto rápido pasa a 2x2 */
     }
 }
 
-@media (max-width: 600px) {
-    .servicios {
-        grid-template-columns: 1fr; /* 1 columna en móviles */
+/*== PANTALLAS ULTRA GRANDES (Desde 1920px hasta 2560px+) ==*/
+@media (min-width: 1920px) {
+    /* Limitamos el ancho para que no se estire al infinito */
+    .navbar, 
+    .hero-texto, 
+    .servicios, 
+    .grid-vehiculos, 
+    .form-container, 
+    .historia-contenedor, 
+    .grid-valores,
+    .glass-card {
+        max-width: 1600px; 
+        margin-left: auto;
+        margin-right: auto;
     }
+
+    /* Aumentamos un poco el tamaño de fuente para que no se vea minúsculo */
+    html {
+        font-size: 18px; 
+    }
+
     .hero-texto h1 {
+        font-size: 4rem;
+    }
+
+    /* En estas pantallas, podemos permitir que la flota respire más */
+    .grid-vehiculos {
+        gap: 60px;
+    }
+
+    /* Las imágenes verticales pueden ser un poco más impactantes */
+    .card-vehiculo:nth-child(1) img,
+    .card-vehiculo:nth-child(2) img,
+    .card-vehiculo:nth-child(3) img {
+        height: 600px; 
+    }
+
+    /* SOLUCIÓN AL FOOTER VOLADOR */
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh; /* Obliga al cuerpo a medir toda la pantalla */
+    }
+
+    main, section:last-of-type {
+        flex: 1; /* Empuja el footer hacia abajo */
+    }
+
+    footer {
+        margin-top: auto; /* Anclaje final */
+        width: 100%;
+    }
+}
+
+/* --- TABLETS PEQUEÑAS (Hasta 850px) --- */
+@media (max-width: 850px) {
+    /* Navbar: Ajustamos el logo para que no ocupe tanto */
+    .logo-img {
+        width: 300px;
+        height: auto;
+    }
+
+    /* Flota de Vehículos: Pasamos a 1 columna */
+    .grid-vehiculos {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .card-vehiculo, 
+    .card-vehiculo:nth-child(n) { /* Anulamos los spans de columnas */
+        grid-column: span 6;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .card-vehiculo img {
+        height: 250px !important; /* Altura uniforme para móviles */
+    }
+
+    .grid-valores {
+        grid-template-columns: repeat(2, 1fr); /* Valores en 2 columnas */
+    }
+}
+
+/* --- MÓVILES (Hasta 768px) --- */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column; 
+        padding: 1.5rem;
+    }
+
+    .nav-links {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+        margin-left: 0; /* Quitamos el margen lateral de escritorio */
+    }
+
+    /* Formulario de Información/Contacto */
+    .form-grid {
+        grid-template-columns: 1fr; /* Una sola columna para los inputs */
+    }
+
+    .container {
+        padding: 20px; /* Reducimos el padding exagerado de 120px */
+        margin: 1rem;
+    }
+
+    #map {
+        height: 350px;
+    }
+
+    .glass-card {
+        padding: 20px;
+    }
+
+    .form-horizontal {
+        grid-template-columns: 1fr; /* Inputs del presupuesto uno bajo otro */
+    }
+}
+
+/* --- MÓVILES PEQUEÑOS (Hasta 600px) --- */
+@media (max-width: 600px) {
+    .hero-texto h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero-texto p {
+        font-size: 1rem;
+    }
+
+    .servicios {
+        grid-template-columns: 1fr; /* 1 columna en servicios */
+    }
+
+    .grid-valores {
+        grid-template-columns: 1fr; /* Valores en 1 columna */
+    }
+
+    .botones-container {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-principal, .btn-secundario {
+        width: 100%;
+    }
+
+    .historia-texto h2 {
         font-size: 1.8rem;
     }
 }
